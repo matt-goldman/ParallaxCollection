@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ParallaxCollection.Controls.HeroCard">
+    <Border x:Name="Card"
+            Margin="30"
+            StrokeShape="RoundRectangle 30">
+        <Grid ColumnDefinitions="2*,3*"
+              Padding="20">
+            <Image Grid.Column="0"
+                   WidthRequest="75"
+                   x:Name="HeroImage"/>
+            
+            <VerticalStackLayout Grid.Column="1">
+                <Label Margin="10,0,0,0"
+                       FontSize="Title"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       x:Name="HeroNameLabel"/>
+            
+                <Label Margin="10,0,0,0"
+                       FontSize="Body"
+                       TextColor="White"
+                       x:Name="SecretIdentityLabel"/>
+            </VerticalStackLayout>
+            
+        </Grid>
+    </Border>
+</ContentView>
