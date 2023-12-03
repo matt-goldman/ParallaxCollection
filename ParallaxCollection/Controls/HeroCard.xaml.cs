@@ -1,4 +1,5 @@
 using Maui.BindableProperty.Generator.Core;
+using ParallaxCollection.Models;
 
 namespace ParallaxCollection.Controls;
 
@@ -8,19 +9,50 @@ public partial class HeroCard : ContentView
     {
         InitializeComponent();
     }
+
+    private double _theY;
+
+    public double TheY
+    {
+        get => _theY;
+        set
+        {
+            _theY = value;
+            YLabel.Text = value.ToString();
+        }
+    }
+
+    private double? initialY;
     
-    // [AutoBindable(OnChanged = nameof(yHeightChanged))]
-    // private double _yHeight;
-    // private void yHeightChanged(double value)
-    // {;
-    // }
-    //
-    // [AutoBindable(OnChanged = nameof(yCentreChanged))]
-    // private double yCentre;
-    // private void yCentreChanged(double value)
-    // {
-    //     
-    // }
+    protected override void OnBindingContextChanged()
+    {
+        base.OnBindingContextChanged();
+        if (BindingContext is not Hero hero) return;
+        hero.OnCalculateOffset += OnCalculateOffset;
+    }
+
+    private void OnCalculateOffset(double yCenter, double scrollOffset)
+    {
+        if (initialY is null)
+        {
+            var ancestors = this.Ancestors();
+            initialY = ancestors.Sum(a => a.Y);
+        }
+        
+        TheY = initialY.Value - scrollOffset;
+        
+        double yOffset;
+        if (TheY > yCenter)
+        {
+            yOffset = (yCenter - TheY) / 10;
+        }
+        else
+        {
+            yOffset = (TheY - yCenter) / 10;
+        }
+        
+        HeroImageImage.TranslationY = yOffset;
+    }
     
     [AutoBindable(OnChanged = nameof(heroNameChanged))]
     private string heroName;
@@ -36,11 +68,18 @@ public partial class HeroCard : ContentView
         SecretIdentityLabel.Text = value;
     }
     
-    [AutoBindable(OnChanged = nameof(imageChanged))]
-    private string image;
-    private void imageChanged(string value)
+    [AutoBindable(OnChanged = nameof(heroLogoChanged))]
+    private string heroLogo;
+    private void heroLogoChanged(string value)
     {
-        HeroImage.Source = value;
+        HeroLogoImage.Source = value;
+    }
+    
+    [AutoBindable(OnChanged = nameof(heroImageChanged))]
+    private string heroImage;
+    private void heroImageChanged(string value)
+    {
+        HeroImageImage.Source = value;
     }
     
     [AutoBindable(OnChanged = nameof(backgroundChanged))]
@@ -49,5 +88,17 @@ public partial class HeroCard : ContentView
     {
         Card.Stroke = new SolidColorBrush(value);
         Card.BackgroundColor = value;
+    }
+}
+
+public static class PositionHelpers
+{
+    public static IEnumerable<VisualElement> Ancestors(this VisualElement element)
+    {
+        while(element != null)
+        {
+            yield return element;
+            element = element.Parent as VisualElement;
+        }
     }
 }

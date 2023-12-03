@@ -7,12 +7,23 @@
             Margin="30"
             StrokeShape="RoundRectangle 30">
         <Grid ColumnDefinitions="2*,3*"
+              RowDefinitions="4*,*"
               Padding="20">
-            <Image Grid.Column="0"
-                   WidthRequest="75"
-                   x:Name="HeroImage"/>
             
-            <VerticalStackLayout Grid.Column="1">
+            <Image Grid.ColumnSpan="2"
+                   HeightRequest="400"
+                   Aspect="AspectFit"
+                   x:Name="HeroImageImage"/>
+            
+            <Image Grid.Column="0"
+                   Grid.Row="1"
+                   WidthRequest="75"
+                   x:Name="HeroLogoImage"
+                   VerticalOptions="Center"/>
+            
+            <VerticalStackLayout Grid.Column="1"
+                                 Grid.Row="1"
+                                 VerticalOptions="Center">
                 <Label Margin="10,0,0,0"
                        FontSize="Title"
                        FontAttributes="Bold"
@@ -24,6 +35,13 @@
                        TextColor="White"
                        x:Name="SecretIdentityLabel"/>
             </VerticalStackLayout>
+            
+            <Label Grid.Column="1"
+                   Grid.Row="1"
+                   HorizontalOptions="End"
+                   HorizontalTextAlignment="End"
+                   VerticalOptions="Center"
+                   x:Name="YLabel"/>
             
         </Grid>
     </Border>

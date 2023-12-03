@@ -7,16 +7,36 @@
              xmlns:models="clr-namespace:ParallaxCollection.Models;assembly=ParallaxCollection"
              x:Class="ParallaxCollection.Pages.HeroesPage"
              x:DataType="vm:HeroesViewModel">
-    <CollectionView ItemsSource="{Binding Heroes}"
-                    Scrolled="ItemsView_OnScrolled"
-                    x:Name="HeroesCollection">
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:Hero">
-                <controls:HeroCard Background="{Binding Background}"
-                                   HeroName="{Binding Name}"
-                                   SecretIdentity="{Binding SecretIdentity}"
-                                   Image="{Binding Image}"/>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+    <ScrollView x:Name="TheScroll"
+                Scrolled="TheScroll_OnScrolled">
+        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Heroes}"
+                             x:Name="HeroesCollection">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="models:Hero">
+                    <controls:HeroCard Background="{Binding Background}"
+                                       HeroName="{Binding Name}"
+                                       SecretIdentity="{Binding SecretIdentity}"
+                                       HeroImage="{Binding HeroImage}"
+                                       HeroLogo="{Binding LogoImage}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </VerticalStackLayout>    
+    </ScrollView>
+    
 </ContentPage>
+
+<!-- 
+<CollectionView ItemsSource="{Binding Heroes}"
+                        Scrolled="ItemsView_OnScrolled"
+                             x:Name="HeroesCollection">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Hero">
+                    <controls:HeroCard Background="{Binding Background}"
+                                       HeroName="{Binding Name}"
+                                       SecretIdentity="{Binding SecretIdentity}"
+                                       HeroImage="{Binding HeroImage}"
+                                       HeroLogo="{Binding LogoImage}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+-->
