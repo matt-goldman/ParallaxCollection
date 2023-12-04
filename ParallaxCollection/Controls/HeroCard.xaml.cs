@@ -3,11 +3,14 @@ using ParallaxCollection.Models;
 
 namespace ParallaxCollection.Controls;
 
-public partial class HeroCard : ContentView
+public partial class HeroCard : ParallaxItemView
 {
     public HeroCard()
     {
         InitializeComponent();
+        BindingContext = this;
+        centreY = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density / 2;
+
     }
 
     private double _theY;
@@ -18,11 +21,17 @@ public partial class HeroCard : ContentView
         set
         {
             _theY = value;
-            YLabel.Text = value.ToString();
         }
     }
 
-    private double? initialY;
+    double? top;
+    double? bottom => top + this.Height;
+
+    private double? _intitialCentre;
+
+    private double centreY;
+
+    double screenHeight = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density;
     
     protected override void OnBindingContextChanged()
     {
@@ -33,25 +42,40 @@ public partial class HeroCard : ContentView
 
     private void OnCalculateOffset(double yCenter, double scrollOffset)
     {
-        if (initialY is null)
+        if (this.Height == -1)
+            return;
+
+        if (top is null)
         {
-            var ancestors = this.Ancestors();
-            initialY = ancestors.Sum(a => a.Y);
+            top = (this.GetScreenCoords().Y / DeviceDisplay.MainDisplayInfo.Density);
         }
+
+        if (_intitialCentre is null)
+        {
+            _intitialCentre = top + (this.Height / 2);
+        }
+
+        if (bottom < 0 || top > screenHeight)
+        {
+            return;
+        }
+
+        top = top + scrollOffset;
         
-        TheY = initialY.Value - scrollOffset;
-        
+        TheY = _intitialCentre.Value - scrollOffset - (centreY/20);
+
+
         double yOffset;
         if (TheY > yCenter)
         {
             yOffset = (yCenter - TheY) / 10;
+            HeroImageImage.TranslationY = -yOffset;
         }
         else
         {
             yOffset = (TheY - yCenter) / 10;
+            HeroImageImage.TranslationY = yOffset;
         }
-        
-        HeroImageImage.TranslationY = yOffset;
     }
     
     [AutoBindable(OnChanged = nameof(heroNameChanged))]
@@ -100,5 +124,16 @@ public static class PositionHelpers
             yield return element;
             element = element.Parent as VisualElement;
         }
+    }
+
+    public static Point GetScreenCoords(this VisualElement view)
+    {
+        var result = new Point(view.X, view.Y);
+        while (view.Parent is VisualElement parent)
+        {
+            result = result.Offset(parent.X, parent.Y);
+            view = parent;
+        }
+        return result;
     }
 }

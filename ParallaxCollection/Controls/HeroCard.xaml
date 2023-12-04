@@ -1,48 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ParallaxCollection.Controls.HeroCard">
+<controls:ParallaxItemView x:Class="ParallaxCollection.Controls.HeroCard"
+                           xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                           xmlns:controls="clr-namespace:ParallaxCollection.Controls">
     <Border x:Name="Card"
             Margin="30"
             StrokeShape="RoundRectangle 30">
-        <Grid ColumnDefinitions="2*,3*"
-              RowDefinitions="4*,*"
-              Padding="20">
-            
-            <Image Grid.ColumnSpan="2"
-                   HeightRequest="400"
+        <Grid Padding="20"
+              ColumnDefinitions="2*,3*"
+              RowDefinitions="4*,*,*">
+
+            <Image x:Name="HeroImageImage"
+                   Grid.ColumnSpan="2"
                    Aspect="AspectFit"
-                   x:Name="HeroImageImage"/>
-            
-            <Image Grid.Column="0"
+                   HeightRequest="400" />
+
+            <Image x:Name="HeroLogoImage"
                    Grid.Row="1"
-                   WidthRequest="75"
-                   x:Name="HeroLogoImage"
-                   VerticalOptions="Center"/>
-            
-            <VerticalStackLayout Grid.Column="1"
-                                 Grid.Row="1"
-                                 VerticalOptions="Center">
-                <Label Margin="10,0,0,0"
-                       FontSize="Title"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       x:Name="HeroNameLabel"/>
-            
-                <Label Margin="10,0,0,0"
-                       FontSize="Body"
-                       TextColor="White"
-                       x:Name="SecretIdentityLabel"/>
-            </VerticalStackLayout>
-            
-            <Label Grid.Column="1"
-                   Grid.Row="1"
-                   HorizontalOptions="End"
-                   HorizontalTextAlignment="End"
+                   Grid.Column="0"
                    VerticalOptions="Center"
-                   x:Name="YLabel"/>
-            
+                   WidthRequest="75" />
+
+            <VerticalStackLayout Grid.Row="1"
+                                 Grid.Column="1"
+                                 VerticalOptions="Center">
+                <Label x:Name="HeroNameLabel"
+                       Margin="10,0,0,0"
+                       FontAttributes="Bold"
+                       FontSize="Title"
+                       TextColor="White" />
+
+                <Label x:Name="SecretIdentityLabel"
+                       Margin="10,0,0,0"
+                       FontSize="Body"
+                       TextColor="White" />
+            </VerticalStackLayout>
+
+            <Label Grid.Row="2"
+                     Grid.ColumnSpan="2"
+                   x:Name="InfoLabel"
+                   LineBreakMode="WordWrap"/>
+
         </Grid>
     </Border>
-</ContentView>
+</controls:ParallaxItemView>
