@@ -1,4 +1,5 @@
 using Maui.BindableProperty.Generator.Core;
+using ParallaxCollection.Helpers;
 using ParallaxCollection.Models;
 
 namespace ParallaxCollection.Controls;
@@ -9,29 +10,7 @@ public partial class HeroCard : ParallaxItemView
     {
         InitializeComponent();
         BindingContext = this;
-        centreY = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density / 2;
-
     }
-
-    private double _theY;
-
-    public double TheY
-    {
-        get => _theY;
-        set
-        {
-            _theY = value;
-        }
-    }
-
-    double? top;
-    double? bottom => top + this.Height;
-
-    private double? _intitialCentre;
-
-    private double centreY;
-
-    double screenHeight = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density;
     
     protected override void OnBindingContextChanged()
     {
@@ -40,42 +19,19 @@ public partial class HeroCard : ParallaxItemView
         hero.OnCalculateOffset += OnCalculateOffset;
     }
 
-    private void OnCalculateOffset(double yCenter, double scrollOffset)
+    private void OnCalculateOffset(double scrollOffset)//, int index)
     {
-        if (this.Height == -1)
+        if (Height == -1)
             return;
 
-        if (top is null)
-        {
-            top = (this.GetScreenCoords().Y / DeviceDisplay.MainDisplayInfo.Density);
-        }
-
-        if (_intitialCentre is null)
-        {
-            _intitialCentre = top + (this.Height / 2);
-        }
-
-        if (bottom < 0 || top > screenHeight)
-        {
-            return;
-        }
-
-        top = top + scrollOffset;
+        var thisCentre = PlatformY + (Height / 2);
         
-        TheY = _intitialCentre.Value - scrollOffset - (centreY/20);
-
-
-        double yOffset;
-        if (TheY > yCenter)
-        {
-            yOffset = (yCenter - TheY) / 10;
-            HeroImageImage.TranslationY = -yOffset;
-        }
-        else
-        {
-            yOffset = (TheY - yCenter) / 10;
-            HeroImageImage.TranslationY = yOffset;
-        }
+        var diff = thisCentre - PositionHelpers.CentreY;
+        
+        if (HeroName == "Batman")
+            Console.WriteLine($"[{HeroName}] My centre: {thisCentre}, translationY: {diff}");
+        
+        HeroImageImage.TranslationY = diff / 10;
     }
     
     [AutoBindable(OnChanged = nameof(heroNameChanged))]
@@ -113,27 +69,7 @@ public partial class HeroCard : ParallaxItemView
         Card.Stroke = new SolidColorBrush(value);
         Card.BackgroundColor = value;
     }
-}
 
-public static class PositionHelpers
-{
-    public static IEnumerable<VisualElement> Ancestors(this VisualElement element)
-    {
-        while(element != null)
-        {
-            yield return element;
-            element = element.Parent as VisualElement;
-        }
-    }
-
-    public static Point GetScreenCoords(this VisualElement view)
-    {
-        var result = new Point(view.X, view.Y);
-        while (view.Parent is VisualElement parent)
-        {
-            result = result.Offset(parent.X, parent.Y);
-            view = parent;
-        }
-        return result;
-    }
+    [AutoBindable]
+    private bool isOnScreen;
 }

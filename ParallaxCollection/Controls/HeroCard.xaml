@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <controls:ParallaxItemView x:Class="ParallaxCollection.Controls.HeroCard"
-                           xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                           xmlns:controls="clr-namespace:ParallaxCollection.Controls">
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ParallaxCollection.Controls;assembly=ParallaxCollection">
     <Border x:Name="Card"
             Margin="30"
             StrokeShape="RoundRectangle 30">
         <Grid Padding="20"
               ColumnDefinitions="2*,3*"
-              RowDefinitions="4*,*,*">
+              RowDefinitions="4*,*">
 
             <Image x:Name="HeroImageImage"
                    Grid.ColumnSpan="2"
@@ -36,12 +36,6 @@
                        FontSize="Body"
                        TextColor="White" />
             </VerticalStackLayout>
-
-            <Label Grid.Row="2"
-                     Grid.ColumnSpan="2"
-                   x:Name="InfoLabel"
-                   LineBreakMode="WordWrap"/>
-
         </Grid>
     </Border>
 </controls:ParallaxItemView>

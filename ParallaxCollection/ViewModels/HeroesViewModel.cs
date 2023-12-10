@@ -1,11 +1,16 @@
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using ParallaxCollection.Models;
 
 namespace ParallaxCollection.ViewModels;
 
-public class HeroesViewModel
+[ObservableObject]
+public partial class HeroesViewModel
 {
-    public double yCenter { get; set; }
+    private List<string> HeroesOnScreen = new();
+
+    [ObservableProperty]
+    private string heroesList;
     public ObservableCollection<Hero> Heroes { get; set; } = new()
     {
         new Hero()
@@ -58,20 +63,45 @@ public class HeroesViewModel
         }
     };
 
-    public void OnScrolled(int firstItemIndex, int lastItemIndex)
+    public void OnScrolled(int firstItemIndex, int lastItemIndex, double verticalOffset)
     {
         for (var i = firstItemIndex; i <= lastItemIndex; i++)
         {
             var hero = Heroes[i];
-            //hero.OnScrolled(yCenter, scrollOffset:);
+            
+            hero.OnScrolled(verticalOffset);//, i);
         }
     }
     
-    public void OnScrolled(double scrollOffset)
-    {
-        foreach (var hero in Heroes)
-        {
-            hero.OnScrolled(yCenter, scrollOffset);
-        }
-    }
+    // public void OnScrolled(double scrollOffset)
+    // {
+    //     for (int i = 0; i < Heroes.Count; i++)
+    //     {
+    //         var hero = Heroes[i];
+    //         hero.OnScrolled(scrollOffset, i);
+    //
+    //         if (hero.IsOnScreen)
+    //         {
+    //             if (!HeroesOnScreen.Contains(hero.Name))
+    //             {
+    //                 HeroesOnScreen.Add(hero.Name);
+    //                 Console.WriteLine($"{hero.Name} appeared on screen");
+    //             }
+    //         }
+    //         else
+    //         {
+    //             if (HeroesOnScreen.Contains(hero.Name))
+    //             {
+    //                 HeroesOnScreen.Remove(hero.Name);
+    //                 Console.WriteLine($"{hero.Name} left the screen");
+    //             }
+    //         }
+    //     }
+    //
+    //     HeroesList = $"Heroes on screen:{Environment.NewLine}{HeroesOnScreen.Count}";
+    //     foreach (var hero in HeroesOnScreen)
+    //     {
+    //         HeroesList += $"{hero},";
+    //     }
+    // }
 }

@@ -5,11 +5,14 @@ namespace ParallaxCollection.ViewModels;
 [ObservableObject]
 public partial class ParallaxViewModel
 {
-    public delegate void CalculateOffset(double yCentre, double scrollOffset);
+    public delegate void CalculateOffset(double scrollOffset);//, int index);
+    
+    [ObservableProperty]
+    private bool isOnScreen;
 
     public event CalculateOffset? OnCalculateOffset;
-    public virtual void OnScrolled(double yCentre, double scrollOffset)
+    public virtual void OnScrolled(double scrollOffset)//, int index)
     {
-        OnCalculateOffset?.Invoke(yCentre, scrollOffset);
+        OnCalculateOffset?.Invoke(scrollOffset);//, index);
     }
 }
