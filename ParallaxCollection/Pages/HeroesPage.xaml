@@ -9,14 +9,17 @@
              x:DataType="vm:HeroesViewModel">
     <CollectionView ItemsSource="{Binding Heroes}"
                     Scrolled="ItemsView_OnScrolled"
+                    VerticalOptions="Center"
                     x:Name="HeroesCollection">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Hero">
-                <controls:HeroCard Background="{Binding Background}"
+                <!--<controls:HeroCard Background="{Binding Background}"
                                    HeroName="{Binding Name}"
                                    SecretIdentity="{Binding SecretIdentity}"
                                    HeroImage="{Binding HeroImage}"
-                                   HeroLogo="{Binding LogoImage}"/>
+                                   HeroLogo="{Binding LogoImage}"/>-->
+
+                <Label Text="{Binding Name}"/>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

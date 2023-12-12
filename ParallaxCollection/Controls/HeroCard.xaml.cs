@@ -13,11 +13,11 @@ public partial class HeroCard : ParallaxItemView
         InitializeComponent();
         BindingContext = this;
 
-        #if ANDROID
+#if ANDROID
         denominator = 10;
-        #elif IOS
+#elif IOS
         denominator = 5;
-        #endif
+#endif
     }
 
     protected override void OnBindingContextChanged()
@@ -34,7 +34,7 @@ public partial class HeroCard : ParallaxItemView
 
 #if IOS
         positionCalculatingView.CalculatePosition();
-    #endif
+#endif
 
         var thisCentre = PlatformY + (Height / 2);
 
@@ -81,7 +81,4 @@ public partial class HeroCard : ParallaxItemView
         Card.Stroke = new SolidColorBrush(value);
         Card.BackgroundColor = value;
     }
-
-    [AutoBindable]
-    private bool isOnScreen;
 }

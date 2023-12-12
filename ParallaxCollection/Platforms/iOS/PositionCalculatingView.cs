@@ -11,7 +11,7 @@ public class PositionCalculatingView : UIView
     {
         if (Superview != null)
         {
-            var positionOnScreen = Superview.ConvertPointToView(Frame.Location, null);
+            var positionOnScreen = Superview.ConvertPointToView(Center, null);
 
             var newY = (int)positionOnScreen.Y;
 

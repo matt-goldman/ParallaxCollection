@@ -38,6 +38,7 @@ public class ParallaxItemView : ContentView
         });
 #endif
     }
+
     public void UpdatePosition(int y)
     {
         PlatformY = y;
