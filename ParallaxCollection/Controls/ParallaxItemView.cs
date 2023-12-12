@@ -1,16 +1,23 @@
+#if IOS
+using Foundation;
+#endif
 using Microsoft.Maui.Handlers;
 
 namespace ParallaxCollection.Controls;
 
 public class ParallaxItemView : ContentView
 {
+#if IOS
+    protected PositionCalculatingView positionCalculatingView;
+#endif
     public ParallaxItemView()
     {
+
         Microsoft.Maui.Handlers.ContentViewHandler.Mapper.AppendToMapping("parallax", (handler, view) =>
         {
-#if ANDROID
             if (view is ParallaxItemView pView)
             {
+#if ANDROID
                 handler.PlatformView.ViewTreeObserver!.ScrollChanged += (s, e) =>
                 {
                     int[] location = new int[2];
@@ -20,9 +27,16 @@ public class ParallaxItemView : ContentView
 
                     pView?.UpdatePosition(y);
                 };
+#elif IOS
+                positionCalculatingView = new PositionCalculatingView
+                {
+                    ParentParallaxItemView = this
+                };
+
+                handler.PlatformView.AddSubview(positionCalculatingView);
             }
-#endif
         });
+#endif
     }
     public void UpdatePosition(int y)
     {

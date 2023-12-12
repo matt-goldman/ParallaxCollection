@@ -2,17 +2,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ParallaxCollection.ViewModels;
 
-[ObservableObject]
-public partial class ParallaxViewModel
+public partial class ParallaxViewModel : ObservableObject
 {
-    public delegate void CalculateOffset(double scrollOffset);//, int index);
-    
-    [ObservableProperty]
-    private bool isOnScreen;
+    public delegate void CalculateOffset();
 
     public event CalculateOffset? OnCalculateOffset;
-    public virtual void OnScrolled(double scrollOffset)//, int index)
+    public virtual void OnScrolled()
     {
-        OnCalculateOffset?.Invoke(scrollOffset);//, index);
+        OnCalculateOffset?.Invoke();
     }
 }

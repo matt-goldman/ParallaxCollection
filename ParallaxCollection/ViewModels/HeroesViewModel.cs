@@ -4,11 +4,8 @@ using ParallaxCollection.Models;
 
 namespace ParallaxCollection.ViewModels;
 
-[ObservableObject]
-public partial class HeroesViewModel
+public partial class HeroesViewModel : ObservableObject
 {
-    private List<string> HeroesOnScreen = new();
-
     [ObservableProperty]
     private string heroesList;
     public ObservableCollection<Hero> Heroes { get; set; } = new()
@@ -63,45 +60,13 @@ public partial class HeroesViewModel
         }
     };
 
-    public void OnScrolled(int firstItemIndex, int lastItemIndex, double verticalOffset)
+    public void OnScrolled(int firstItemIndex, int lastItemIndex)
     {
         for (var i = firstItemIndex; i <= lastItemIndex; i++)
         {
             var hero = Heroes[i];
-            
-            hero.OnScrolled(verticalOffset);//, i);
+
+            hero.OnScrolled();
         }
     }
-    
-    // public void OnScrolled(double scrollOffset)
-    // {
-    //     for (int i = 0; i < Heroes.Count; i++)
-    //     {
-    //         var hero = Heroes[i];
-    //         hero.OnScrolled(scrollOffset, i);
-    //
-    //         if (hero.IsOnScreen)
-    //         {
-    //             if (!HeroesOnScreen.Contains(hero.Name))
-    //             {
-    //                 HeroesOnScreen.Add(hero.Name);
-    //                 Console.WriteLine($"{hero.Name} appeared on screen");
-    //             }
-    //         }
-    //         else
-    //         {
-    //             if (HeroesOnScreen.Contains(hero.Name))
-    //             {
-    //                 HeroesOnScreen.Remove(hero.Name);
-    //                 Console.WriteLine($"{hero.Name} left the screen");
-    //             }
-    //         }
-    //     }
-    //
-    //     HeroesList = $"Heroes on screen:{Environment.NewLine}{HeroesOnScreen.Count}";
-    //     foreach (var hero in HeroesOnScreen)
-    //     {
-    //         HeroesList += $"{hero},";
-    //     }
-    // }
 }

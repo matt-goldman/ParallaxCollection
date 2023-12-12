@@ -7,27 +7,6 @@
              xmlns:models="clr-namespace:ParallaxCollection.Models;assembly=ParallaxCollection"
              x:Class="ParallaxCollection.Pages.HeroesPage"
              x:DataType="vm:HeroesViewModel">
-    <!-- <Grid> -->
-    <!--     <ScrollView x:Name="TheScroll" -->
-    <!--                 Scrolled="TheScroll_OnScrolled"> -->
-    <!--         <VerticalStackLayout BindableLayout.ItemsSource="{Binding Heroes}" -->
-    <!--                              x:Name="HeroesCollection"> -->
-    <!--             <BindableLayout.ItemTemplate> -->
-    <!--                 <DataTemplate x:DataType="models:Hero"> -->
-    <!--                     <controls:HeroCard Background="{Binding Background}" -->
-    <!--                                        HeroName="{Binding Name}" -->
-    <!--                                        SecretIdentity="{Binding SecretIdentity}" -->
-    <!--                                        HeroImage="{Binding HeroImage}" -->
-    <!--                                        HeroLogo="{Binding LogoImage}" -->
-    <!--                                        IsOnScreen="{Binding IsOnScreen}"/> -->
-    <!--                 </DataTemplate> -->
-    <!--             </BindableLayout.ItemTemplate> -->
-    <!--         </VerticalStackLayout> -->
-    <!--     </ScrollView> -->
-    <!--     <Label VerticalOptions="End" -->
-    <!--            HorizontalTextAlignment="Center" -->
-    <!--            Text="{Binding HeroesList}" /> -->
-    <!-- </Grid> -->
     <CollectionView ItemsSource="{Binding Heroes}"
                     Scrolled="ItemsView_OnScrolled"
                     x:Name="HeroesCollection">
