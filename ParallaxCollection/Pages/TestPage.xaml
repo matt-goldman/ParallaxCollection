@@ -3,13 +3,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParallaxCollection.Pages.TestPage">
-    <CollectionView ItemsSource="{Binding Names}"
-                    VerticalOptions="Center">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Label Text="{Binding .}"
-                       Margin="20"/>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+    <Grid>
+        <CollectionView ItemsSource="{Binding Names}"
+                        VerticalOptions="Center">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding .}"
+                           Margin="20"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

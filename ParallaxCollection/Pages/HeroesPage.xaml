@@ -7,20 +7,24 @@
              xmlns:models="clr-namespace:ParallaxCollection.Models;assembly=ParallaxCollection"
              x:Class="ParallaxCollection.Pages.HeroesPage"
              x:DataType="vm:HeroesViewModel">
-    <CollectionView ItemsSource="{Binding Heroes}"
-                    Scrolled="ItemsView_OnScrolled"
-                    VerticalOptions="Center"
-                    x:Name="HeroesCollection">
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:Hero">
-                <!--<controls:HeroCard Background="{Binding Background}"
+    <Grid>
+        <CollectionView ItemsSource="{Binding Heroes}"
+                        Scrolled="ItemsView_OnScrolled"
+                        VerticalOptions="Center"
+                        x:Name="HeroesCollection">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="50"
+                                   Orientation="Vertical"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Hero">
+                    <controls:HeroCard Background="{Binding Background}"
                                    HeroName="{Binding Name}"
                                    SecretIdentity="{Binding SecretIdentity}"
                                    HeroImage="{Binding HeroImage}"
-                                   HeroLogo="{Binding LogoImage}"/>-->
-
-                <Label Text="{Binding Name}"/>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                                   HeroLogo="{Binding LogoImage}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

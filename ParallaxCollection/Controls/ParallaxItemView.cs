@@ -34,9 +34,9 @@ public class ParallaxItemView : ContentView
                 };
 
                 handler.PlatformView.AddSubview(positionCalculatingView);
+#endif
             }
         });
-#endif
     }
 
     public void UpdatePosition(int y)

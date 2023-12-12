@@ -16,7 +16,7 @@ public partial class HeroCard : ParallaxItemView
 #if ANDROID
         denominator = 10;
 #elif IOS
-        denominator = 5;
+        denominator = 3;
 #endif
     }
 
