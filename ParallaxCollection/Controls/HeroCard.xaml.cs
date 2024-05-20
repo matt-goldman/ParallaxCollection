@@ -32,18 +32,20 @@ public partial class HeroCard : ParallaxItemView
         if (Height == -1)
             return;
 
+        double thisCentre = 0;
 #if IOS
         positionCalculatingView.CalculatePosition();
+        thisCentre = PlatformY;
+#elif ANDROID
+        thisCentre = PlatformY + (Height / 2);
 #endif
-
-        var thisCentre = PlatformY + (Height / 2);
 
         var diff = thisCentre - PositionHelpers.CentreY;
 
-        if (HeroName == "Batman")
-            Console.WriteLine($"[{HeroName}] My centre: {thisCentre}, translationY: {diff}");
+        var transY = diff / denominator;
+        HeroImageImage.TranslationY = transY;
 
-        HeroImageImage.TranslationY = diff / denominator;
+        PositionDetailsLabel.Text = $"Centre: {thisCentre}";//{Environment.NewLine}TranslationY: {Math.Round(transY)}";
     }
 
     [AutoBindable(OnChanged = nameof(heroNameChanged))]

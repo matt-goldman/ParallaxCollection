@@ -1,4 +1,5 @@
-﻿using UIKit;
+﻿using CoreGraphics;
+using UIKit;
 using ParallaxCollection.Controls;
 
 namespace ParallaxCollection;
@@ -7,17 +8,21 @@ public class PositionCalculatingView : UIView
 {
     public ParallaxItemView ParentParallaxItemView { get; set; }
 
-    private double _density = DeviceDisplay.MainDisplayInfo.Density;
+    private readonly double _density = DeviceDisplay.MainDisplayInfo.Density;
 
     public void CalculatePosition()
     {
-        if (Superview != null)
-        {
-            var positionOnScreen = Superview.ConvertPointToView(Center, null);
+        {   
+            var location = new CGPoint();
+            var view = ParentParallaxItemView.Handler?.PlatformView as UIView;
+            if (view != null)
+            {
+                location = view.ConvertPointToView(view.Bounds.Location, null);
+            }
+            
+            var locationCenterY = location.Y + (ParentParallaxItemView.Height / 2);
 
-            var newY = (int)(positionOnScreen.Y / _density);
-
-            ParentParallaxItemView?.UpdatePosition(newY);
+            ParentParallaxItemView.PlatformY = (int)(locationCenterY / _density);
         }
     }
 }

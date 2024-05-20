@@ -26,5 +26,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Label HorizontalOptions="End"
+               x:Name="HeightLabel"/>
     </Grid>
 </ContentPage>
