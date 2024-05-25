@@ -4,11 +4,34 @@ using ParallaxCollection.Models;
 
 namespace ParallaxCollection.ViewModels;
 
-public partial class HeroesViewModel : ObservableObject
+public partial class MainViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private string heroesList;
-    public ObservableCollection<Hero> Heroes { get; set; } = new()
+    public MainViewModel()
+    {
+        SeedHeroes();
+    }
+    
+    public ObservableCollection<HeroCardViewModel> Heroes { get; set; } = new();
+
+    public void OnScrolled(int firstItemIndex, int lastItemIndex)
+    {
+        for (var i = firstItemIndex; i <= lastItemIndex; i++)
+        {
+            var hero = Heroes[i];
+
+            hero.OnScrolled();
+        }
+    }
+    
+    private void SeedHeroes()
+    {
+        foreach (var hero in _heroes)
+        {
+            Heroes.Add(new HeroCardViewModel(hero));
+        }
+    }
+    
+    private List<Hero> _heroes { get; set; } = new()
     {
         new Hero()
         {
@@ -59,14 +82,4 @@ public partial class HeroesViewModel : ObservableObject
             Background = Colors.Red
         }
     };
-
-    public void OnScrolled(int firstItemIndex, int lastItemIndex)
-    {
-        for (var i = firstItemIndex; i <= lastItemIndex; i++)
-        {
-            var hero = Heroes[i];
-
-            hero.OnScrolled();
-        }
-    }
 }

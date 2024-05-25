@@ -1,7 +1,6 @@
 #if IOS
 using Foundation;
 #endif
-using Microsoft.Maui.Handlers;
 
 namespace ParallaxCollection.Controls;
 
@@ -51,7 +50,7 @@ public class ParallaxItemView : ContentView
         set
         {
             _y = value;
-            OnPropertyChanged(nameof(PlatformY));
+            OnPropertyChanged();
         }
     }
 }

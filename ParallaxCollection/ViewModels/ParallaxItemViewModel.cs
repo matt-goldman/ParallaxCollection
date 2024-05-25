@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ParallaxCollection.ViewModels;
 
-public partial class ParallaxViewModel : ObservableObject
+public partial class ParallaxItemViewModel : ObservableObject
 {
     public delegate void CalculateOffset();
 

@@ -1,6 +1,4 @@
-﻿using ParallaxCollection.Pages;
-
-namespace ParallaxCollection;
+﻿namespace ParallaxCollection;
 
 public partial class App : Application
 {
@@ -8,6 +6,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new HeroesPage();
+        MainPage = new MainPage();
     }
 }
