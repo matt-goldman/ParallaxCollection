@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ParallaxCollection.ViewModels;assembly=ParallaxCollection"
              xmlns:controls="clr-namespace:ParallaxCollection.Controls;assembly=ParallaxCollection"
-             xmlns:models="clr-namespace:ParallaxCollection.Models;assembly=ParallaxCollection"
              x:DataType="vm:MainViewModel"
              x:Class="ParallaxCollection.MainPage">
 

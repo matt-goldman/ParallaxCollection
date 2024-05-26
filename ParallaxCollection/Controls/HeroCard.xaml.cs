@@ -1,6 +1,5 @@
 using Maui.BindableProperty.Generator.Core;
 using ParallaxCollection.Helpers;
-using ParallaxCollection.Models;
 using ParallaxCollection.ViewModels;
 
 namespace ParallaxCollection.Controls;
