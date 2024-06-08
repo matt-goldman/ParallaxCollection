@@ -44,8 +44,6 @@ public partial class HeroCard : ParallaxItemView
 
         var transY = diff / denominator;
         HeroImageImage.TranslationY = transY;
-
-        PositionDetailsLabel.Text = $"Centre: {thisCentre}";//{Environment.NewLine}TranslationY: {Math.Round(transY)}";
     }
 
     [AutoBindable(OnChanged = nameof(heroNameChanged))]

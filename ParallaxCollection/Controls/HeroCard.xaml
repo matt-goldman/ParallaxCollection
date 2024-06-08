@@ -40,8 +40,5 @@
                   HorizontalOptions="Center"
                   Aspect="AspectFit"
                   HeightRequest="400" />
-           
-           <Label HorizontalOptions="End"
-                  x:Name="PositionDetailsLabel"/>
        </Grid>
 </controls:ParallaxItemView>

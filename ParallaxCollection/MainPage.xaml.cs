@@ -17,10 +17,4 @@ public partial class MainPage : ContentPage
     {
         _viewModel.OnScrolled(e.FirstVisibleItemIndex, e.LastVisibleItemIndex);
     }
-
-    protected override void OnSizeAllocated(double width, double height)
-    {
-        base.OnSizeAllocated(width, height);
-        HeightLabel.Text = $"Height: {height}";
-    }
 }
