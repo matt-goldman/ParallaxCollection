@@ -1,8 +1,6 @@
-using ParallaxCollection.ViewModels;
-
 namespace ParallaxCollection.Models;
 
-public class Hero : ParallaxViewModel
+public class Hero
 {
     public string Name { get; set; }
     public string SecretIdentity { get; set; }
