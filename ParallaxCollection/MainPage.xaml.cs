@@ -1,4 +1,5 @@
-﻿using ParallaxCollection.ViewModels;
+﻿using Microsoft.Maui.Controls.Internals;
+using ParallaxCollection.ViewModels;
 
 namespace ParallaxCollection;
 

@@ -4,7 +4,7 @@ using Foundation;
 
 namespace ParallaxCollection.Controls;
 
-public class ParallaxItemView : ContentView
+public abstract class ParallaxItemView : ContentView
 {
 #if IOS
     protected PositionCalculatingView positionCalculatingView;
@@ -53,4 +53,8 @@ public class ParallaxItemView : ContentView
             OnPropertyChanged();
         }
     }
+
+    protected int MyIndex => Parent.IndexOf(this);
+
+    public virtual void OnScrolled() { }
 }
