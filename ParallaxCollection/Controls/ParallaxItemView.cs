@@ -2,6 +2,8 @@
 using Foundation;
 #endif
 
+using ParallaxCollection.Helpers;
+
 namespace ParallaxCollection.Controls;
 
 public abstract class ParallaxItemView : ContentView
@@ -36,6 +38,12 @@ public abstract class ParallaxItemView : ContentView
 #endif
             }
         });
+
+#if ANDROID
+        _denominator = 10;
+#elif IOS
+        _denominator = 3;
+#endif
     }
 
     public void UpdatePosition(int y)
@@ -54,5 +62,25 @@ public abstract class ParallaxItemView : ContentView
         }
     }
 
-    public virtual void OnScrolled() { }
+    private int _denominator;
+
+    protected double ParallaxOffsetY;
+
+    public virtual void OnScrolled()
+    {
+        if (Height == -1)
+            return;
+
+        double thisCentre = 0;
+#if IOS
+        positionCalculatingView.CalculatePosition();
+        thisCentre = PlatformY;
+#elif ANDROID
+        thisCentre = PlatformY + (Height / 2);
+#endif
+
+        var diff = thisCentre - PositionHelpers.CentreY;
+
+        ParallaxOffsetY = diff / _denominator;
+    }
 }

@@ -5,6 +5,6 @@
     <ActiveDebugFramework>net8.0-android</ActiveDebugFramework>
     <ActiveDebugProfile>Pixel 7 - API 34 (Android 14.0 - API 34)</ActiveDebugProfile>
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
-    <DefaultDevice>pixel_5_-_api_33</DefaultDevice>
+    <DefaultDevice>pixel_7_-_api_34</DefaultDevice>
   </PropertyGroup>
 </Project>

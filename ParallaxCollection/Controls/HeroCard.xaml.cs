@@ -1,41 +1,19 @@
 using Maui.BindableProperty.Generator.Core;
-using ParallaxCollection.Helpers;
 
 namespace ParallaxCollection.Controls;
 
 public partial class HeroCard : ParallaxItemView
 {
-    int denominator;
-
     public HeroCard()
     {
         InitializeComponent();
         BindingContext = this;
-
-#if ANDROID
-        denominator = 10;
-#elif IOS
-        denominator = 3;
-#endif
     }
 
     public override void OnScrolled()
     {
-        if (Height == -1)
-            return;
-
-        double thisCentre = 0;
-#if IOS
-        positionCalculatingView.CalculatePosition();
-        thisCentre = PlatformY;
-#elif ANDROID
-        thisCentre = PlatformY + (Height / 2);
-#endif
-
-        var diff = thisCentre - PositionHelpers.CentreY;
-
-        var transY = diff / denominator;
-        HeroImageImage.TranslationY = transY;
+        base.OnScrolled();
+        HeroImageImage.TranslationY = ParallaxOffsetY;
     }
 
     [AutoBindable(OnChanged = nameof(heroNameChanged))]
