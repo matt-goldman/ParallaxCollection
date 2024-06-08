@@ -1,6 +1,5 @@
 using Maui.BindableProperty.Generator.Core;
 using ParallaxCollection.Helpers;
-using ParallaxCollection.ViewModels;
 
 namespace ParallaxCollection.Controls;
 
@@ -20,14 +19,7 @@ public partial class HeroCard : ParallaxItemView
 #endif
     }
 
-    protected override void OnBindingContextChanged()
-    {
-        base.OnBindingContextChanged();
-        if (BindingContext is not HeroCardViewModel hero) return;
-        hero.OnCalculateOffset += OnCalculateOffset;
-    }
-
-    private void OnCalculateOffset()
+    public override void OnScrolled()
     {
         if (Height == -1)
             return;

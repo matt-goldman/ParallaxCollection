@@ -8,8 +8,6 @@ public class ParallaxCollectionView : CollectionView
 
         var vte = (IVisualTreeElement)this;
 
-        var items = vte.GetVisualTreeDescendants();
-
         var visualItems = vte.GetVisualChildren();
 
         foreach (var item in visualItems)
@@ -17,11 +15,6 @@ public class ParallaxCollectionView : CollectionView
             if (item is ParallaxItemView parallaxItem)
             {
                 parallaxItem.OnScrolled();
-            }
-            else
-            {
-                var itemType = item.GetType();
-                Console.WriteLine($"[ParallaxCollectionView] item type is {itemType.Name}");
             }
         }
     }

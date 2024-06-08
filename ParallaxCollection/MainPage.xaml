@@ -7,15 +7,14 @@
              x:Class="ParallaxCollection.MainPage">
 
     <Grid>
-        <CollectionView ItemsSource="{Binding Heroes}"
-                        Scrolled="ItemsView_OnScrolled"
-                        VerticalOptions="Center"
-                        x:Name="HeroesCollection">
-            <CollectionView.ItemsLayout>
+        <controls:ParallaxCollectionView ItemsSource="{Binding Heroes}"
+                                         VerticalOptions="Center"
+                                         x:Name="HeroesCollection">
+            <controls:ParallaxCollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="50"
                                    Orientation="Vertical"></LinearItemsLayout>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
+            </controls:ParallaxCollectionView.ItemsLayout>
+            <controls:ParallaxCollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:HeroCardViewModel">
                     <controls:HeroCard Background="{Binding Background}"
                                        HeroName="{Binding Name}"
@@ -23,8 +22,8 @@
                                        HeroImage="{Binding HeroImage}"
                                        HeroLogo="{Binding LogoImage}"/>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            </controls:ParallaxCollectionView.ItemTemplate>
+        </controls:ParallaxCollectionView>
     </Grid>
 
 </ContentPage>

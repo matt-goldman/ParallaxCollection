@@ -54,7 +54,5 @@ public abstract class ParallaxItemView : ContentView
         }
     }
 
-    protected int MyIndex => Parent.IndexOf(this);
-
     public virtual void OnScrolled() { }
 }

@@ -12,16 +12,6 @@ public partial class MainViewModel : ObservableObject
     }
     
     public ObservableCollection<HeroCardViewModel> Heroes { get; set; } = new();
-
-    public void OnScrolled(int firstItemIndex, int lastItemIndex)
-    {
-        for (var i = firstItemIndex; i <= lastItemIndex; i++)
-        {
-            var hero = Heroes[i];
-
-            hero.OnScrolled();
-        }
-    }
     
     private void SeedHeroes()
     {

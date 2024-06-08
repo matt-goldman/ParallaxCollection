@@ -2,7 +2,7 @@ using ParallaxCollection.Models;
 
 namespace ParallaxCollection.ViewModels;
 
-public class HeroCardViewModel(Hero hero) : ParallaxItemViewModel
+public class HeroCardViewModel(Hero hero)
 {
     public string Name { get; set; } = hero.Name;
     public string SecretIdentity { get; set; } = hero.SecretIdentity;

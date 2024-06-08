@@ -13,9 +13,4 @@ public partial class MainPage : ContentPage
         _viewModel = new MainViewModel();
         BindingContext = _viewModel;
     }
-
-    private void ItemsView_OnScrolled(object sender, ItemsViewScrolledEventArgs e)
-    {
-        _viewModel.OnScrolled(e.FirstVisibleItemIndex, e.LastVisibleItemIndex);
-    }
 }
