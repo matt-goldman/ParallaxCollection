@@ -20,7 +20,7 @@ public partial class ParallaxItemView
                     int x = location[0];
                     int y = location[1];
 
-                    pView?.UpdatePlatformY(y);
+                    pView.PlatformY = y;
                 };
             }
         });
