@@ -15,18 +15,17 @@ public partial class ParallaxItemView
     {
         CalculatePosition();
         ThisCenter = PlatformY;
-        _platformView = this.Handler?.PlatformView as UIView;
     }
 
     private readonly double _density = DeviceDisplay.MainDisplayInfo.Density;
-    private UIView _platformView;
 
     public void CalculatePosition()
     {
         var location = new CGPoint();
-        if (_platformView != null)
+        var platformView = this.Handler?.PlatformView as UIView;
+        if (platformView != null)
         {
-            location = _platformView.ConvertPointToView(_platformView.Bounds.Location, null);
+            location = platformView.ConvertPointToView(platformView.Bounds.Location, null);
         }
 
         var locationCenterY = location.Y + (Height / 2);
