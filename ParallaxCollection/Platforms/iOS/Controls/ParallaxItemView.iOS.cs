@@ -13,6 +13,7 @@ public partial class ParallaxItemView
 
     partial void CalculateCentre()
     {
+        CalculatePosition();
         ThisCenter = PlatformY + (Height / 2);
     }
 
