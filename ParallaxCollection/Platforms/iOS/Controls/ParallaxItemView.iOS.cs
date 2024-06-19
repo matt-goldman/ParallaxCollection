@@ -8,13 +8,12 @@ public partial class ParallaxItemView
     partial void ConfigurePlatform()
     {
         _denominator = 3;
-        CenterY = 160;
+        CenterY = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density / 2;
     }
 
     partial void CalculateCentre()
     {
-        CalculatePosition();
-        ThisCenter = PlatformY;
+        ThisCenter = PlatformY + (Height / 2);
     }
 
     private readonly double _density = DeviceDisplay.MainDisplayInfo.Density;
@@ -28,8 +27,6 @@ public partial class ParallaxItemView
             location = platformView.ConvertPointToView(platformView.Bounds.Location, null);
         }
 
-        var locationCenterY = location.Y + (Height / 2);
-
-        PlatformY = (int)(locationCenterY / _density);
+        PlatformY = (int)(location.Y / _density);
     }
 }

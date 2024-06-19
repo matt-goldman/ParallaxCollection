@@ -30,9 +30,4 @@ public partial class ParallaxItemView
     {
         ThisCenter = PlatformY + (Height / 2);
     }
-
-    public void UpdatePlatformY(int y)
-    {
-        PlatformY = y;
-    }
 }
