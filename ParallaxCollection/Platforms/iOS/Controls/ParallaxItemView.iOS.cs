@@ -21,8 +21,7 @@ public partial class ParallaxItemView
     public void CalculatePosition()
     {
         var location = new CGPoint();
-        var platformView = this.Handler?.PlatformView as UIView;
-        if (platformView != null)
+        if (this.Handler?.PlatformView is UIView platformView)
         {
             location = platformView.ConvertPointToView(platformView.Bounds.Location, null);
         }
