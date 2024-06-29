@@ -1,20 +1,33 @@
-﻿namespace ParallaxCollection.Controls;
-
-public class ParallaxCollectionView : CollectionView
+﻿namespace ParallaxCollection.Controls
 {
-    protected override void OnScrolled(ItemsViewScrolledEventArgs e)
+    public class ParallaxCollectionView : CollectionView
     {
-        base.OnScrolled(e);
+        private readonly List<ParallaxItemView> _parallaxItemViews = new List<ParallaxItemView>();
 
-        var vte = (IVisualTreeElement)this;
-
-        var visualItems = vte.GetVisualChildren();
-
-        foreach (var item in visualItems)
+        protected override void OnScrolled(ItemsViewScrolledEventArgs e)
         {
-            if (item is ParallaxItemView parallaxItem)
+            base.OnScrolled(e);
+            foreach (var item in _parallaxItemViews)
             {
-                parallaxItem.OnScrolled();
+                item?.OnScrolled();
+            }
+        }
+
+        protected override void OnChildAdded(Element child)
+        {
+            base.OnChildAdded(child);
+            if (child is ParallaxItemView parallaxItemView)
+            {
+                _parallaxItemViews.Add(parallaxItemView);
+            }
+        }
+
+        protected override void OnChildRemoved(Element child, int oldIndex)
+        {
+            base.OnChildRemoved(child, oldIndex);
+            if (child is ParallaxItemView parallaxItemView)
+            {
+                _parallaxItemViews.Remove(parallaxItemView);
             }
         }
     }
