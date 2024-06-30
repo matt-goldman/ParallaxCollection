@@ -1,6 +1,6 @@
 namespace ParallaxCollection.Controls;
 
-public abstract partial class ParallaxItemView : ContentView
+public partial class ParallaxItemView : ContentView
 {
     private int _y;
     private int _denominator;
@@ -11,10 +11,10 @@ public abstract partial class ParallaxItemView : ContentView
     public int PlatformY
     {
         get => _y;
-        private set
+        set
         {
             _y = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(PlatformY));
         }
     }
 
@@ -28,11 +28,14 @@ public abstract partial class ParallaxItemView : ContentView
         if (Height == -1)
             return;
 
-        CalculateCentre();
+        CalculateCenter();
+
         var diff = ThisCenter - CenterY;
         ParallaxOffsetY = diff / _denominator;
     }
 
     partial void ConfigurePlatform();
-    partial void CalculateCentre();
+    partial void CalculateCenter();
+
+    
 }

@@ -1,29 +1,12 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using ParallaxCollection.Models;
 
 namespace ParallaxCollection.ViewModels;
 
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel
 {
-    public MainViewModel()
-    {
-        SeedHeroes();
-    }
-    
-    public ObservableCollection<HeroCardViewModel> Heroes { get; set; } = new();
-    
-    private void SeedHeroes()
-    {
-        foreach (var hero in _heroes)
-        {
-            Heroes.Add(new HeroCardViewModel(hero));
-        }
-    }
-    
-    private List<Hero> _heroes { get; set; } = new()
-    {
-        new Hero()
+    public ObservableCollection<HeroViewModel> Heroes { get; set; } =
+    [
+        new HeroViewModel()
         {
             Name = "Superman",
             SecretIdentity = "Clark Kent",
@@ -31,7 +14,7 @@ public partial class MainViewModel : ObservableObject
             LogoImage = "superman_logo.png",
             Background = Colors.Blue
         },
-        new Hero()
+        new HeroViewModel()
         {
             Name = "Batman",
             SecretIdentity = "Bruce Wayne",
@@ -39,7 +22,7 @@ public partial class MainViewModel : ObservableObject
             LogoImage = "batman_logo.png",
             Background = Colors.DarkGray
         },
-        new Hero()
+        new HeroViewModel()
         {
             Name = "Wonder Woman",
             SecretIdentity = "Diana Prince",
@@ -47,7 +30,7 @@ public partial class MainViewModel : ObservableObject
             LogoImage = "wonderwoman_logo.png",
             Background = Colors.Gold
         },
-        new Hero()
+        new HeroViewModel()
         {
             Name = "The Flash",
             SecretIdentity = "Barry Allen",
@@ -55,7 +38,7 @@ public partial class MainViewModel : ObservableObject
             LogoImage = "theflash_logo.png",
             Background = Colors.Red
         },
-        new Hero()
+        new HeroViewModel()
         {
             Name = "Green Lantern",
             SecretIdentity = "Hal Jordan",
@@ -63,7 +46,7 @@ public partial class MainViewModel : ObservableObject
             LogoImage = "greenlantern_logo.png",
             Background = Colors.Green
         },
-        new Hero()
+        new HeroViewModel()
         {
             Name = "Shazam",
             SecretIdentity = "Billy Batson",
@@ -71,5 +54,5 @@ public partial class MainViewModel : ObservableObject
             LogoImage = "shazam_logo.png",
             Background = Colors.Red
         }
-    };
+    ];
 }

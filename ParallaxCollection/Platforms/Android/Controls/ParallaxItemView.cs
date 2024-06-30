@@ -1,15 +1,13 @@
-﻿using Microsoft.Maui.Handlers;
-
-namespace ParallaxCollection.Controls;
+﻿namespace ParallaxCollection.Controls;
 
 public partial class ParallaxItemView
 {
     partial void ConfigurePlatform()
     {
-        _denominator = 10;
         CenterY = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density / 2;
+        _denominator = 10;
 
-        ContentViewHandler.Mapper.AppendToMapping("parallax", (handler, view) =>
+        Microsoft.Maui.Handlers.ContentViewHandler.Mapper.AppendToMapping("parallax", (handler, view) =>
         {
             if (view is ParallaxItemView pView)
             {
@@ -20,14 +18,19 @@ public partial class ParallaxItemView
                     int x = location[0];
                     int y = location[1];
 
-                    pView.PlatformY = y;
+                    pView?.UpdatePosition(y);
                 };
             }
         });
     }
 
-    partial void CalculateCentre()
+    partial void CalculateCenter()
     {
         ThisCenter = PlatformY + (Height / 2);
+    }
+
+    public void UpdatePosition(int y)
+    {
+        PlatformY = y;
     }
 }

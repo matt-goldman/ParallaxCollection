@@ -67,9 +67,6 @@
       <Compile Update="Platforms\iOS\Controls\ParallaxItemView.iOS.cs">
         <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
       </Compile>
-      <Compile Update="Platforms\Android\Controls\ParallaxItemView.Android.cs">
-        <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
-      </Compile>
     </ItemGroup>
 
     <!-- Build Properties must be defined within these property groups to ensure successful publishing
